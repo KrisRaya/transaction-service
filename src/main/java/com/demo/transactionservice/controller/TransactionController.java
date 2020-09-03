@@ -52,10 +52,10 @@ public class TransactionController {
         }
 
         final Wallet wallet = restTemplate.getForObject(
-                "http://localhost:8080/wallet/findByPhoneNumber/" + request.getWalletPhoneNumber(), Wallet.class);
+                "http://wallet-service/findByPhoneNumber/" + request.getWalletPhoneNumber(), Wallet.class);
 
         final Merchant merchant = restTemplate.getForObject(
-                "http://localhost:8080/merchant/findById/" + request.getMerchantId(), Merchant.class);
+                "http://merchant-service/findById/" + request.getMerchantId(), Merchant.class);
 
         final List<ErrorMessage> transactionErrorMessages = validator.transactionValidation(request, wallet, merchant);
         if (!transactionErrorMessages.isEmpty()) {
@@ -69,12 +69,12 @@ public class TransactionController {
         walletTransaction.setPhoneNumber(request.getWalletPhoneNumber());
         walletTransaction.setAmount(request.getAmount());
 
-        restTemplate.postForEntity("http://localhost:8080/wallet/deductBalance/", walletTransaction, Wallet.class);
+        restTemplate.postForEntity("http://wallet-service/deductBalance/", walletTransaction, Wallet.class);
 
         if (merchant != null) {
             merchant.setBalance(request.getAmount());
         }
-        restTemplate.postForEntity("http://localhost:8080/merchant/payMerchant/", merchant, Merchant.class);
+        restTemplate.postForEntity("http://merchant-service/payMerchant/", merchant, Merchant.class);
 
         return ResponseEntity.ok(new ResponseWrapper(recordsTransaction, Collections.singletonMap(STATUS, HttpStatus.OK)));
     }
