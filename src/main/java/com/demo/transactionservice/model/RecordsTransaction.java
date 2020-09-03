@@ -15,6 +15,7 @@ public class RecordsTransaction {
     private Long amount;
     private Long walletId;
     private String walletName;
+    private String walletPhoneNumber;
     private Long merchantId;
     private String merchantName;
 
@@ -56,6 +57,14 @@ public class RecordsTransaction {
 
     public void setWalletName(String walletName) {
         this.walletName = walletName;
+    }
+
+    public String getWalletPhoneNumber() {
+        return walletPhoneNumber;
+    }
+
+    public void setWalletPhoneNumber(String walletPhoneNumber) {
+        this.walletPhoneNumber = walletPhoneNumber;
     }
 
     public Long getMerchantId() {
