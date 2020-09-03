@@ -8,6 +8,7 @@ import com.demo.transactionservice.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,6 +28,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public RecordsTransaction saveTransaction(Wallet wallet) {
         RecordsTransaction records = new RecordsTransaction();
+        records.setDate(LocalDateTime.now());
         records.setStatus(CREDIT);
         records.setAmount(wallet.getBalance());
         records.setWalletId(wallet.getId());
@@ -38,6 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public RecordsTransaction doPayment(TransactionRequest request, Wallet wallet, Merchant merchant) {
         RecordsTransaction record = new RecordsTransaction();
+        record.setDate(LocalDateTime.now());
         record.setStatus(DEBIT);
         record.setWalletId(wallet.getId());
         record.setWalletName(wallet.getName());

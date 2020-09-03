@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transaction")
@@ -11,6 +12,7 @@ public class RecordsTransaction {
     @Id
     @GeneratedValue
     private Long id;
+    private LocalDateTime date;
     private String status;
     private Long amount;
     private Long walletId;
@@ -25,6 +27,14 @@ public class RecordsTransaction {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public String getStatus() {

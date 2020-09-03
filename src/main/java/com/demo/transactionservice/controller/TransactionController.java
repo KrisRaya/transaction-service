@@ -71,6 +71,11 @@ public class TransactionController {
 
         restTemplate.postForEntity("http://localhost:8080/wallet/deductBalance/", walletTransaction, Wallet.class);
 
+        if (merchant != null) {
+            merchant.setBalance(request.getAmount());
+        }
+        restTemplate.postForEntity("http://localhost:8080/merchant/payMerchant/", merchant, Merchant.class);
+
         return ResponseEntity.ok(new ResponseWrapper(recordsTransaction, Collections.singletonMap(STATUS, HttpStatus.OK)));
     }
 }
