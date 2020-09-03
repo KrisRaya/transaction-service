@@ -1,9 +1,14 @@
 package com.demo.transactionservice.model;
 
+import javax.validation.constraints.NotNull;
+
 public class TransactionRequest {
 
+    @NotNull(message = "amount must be set")
     private Long amount;
+    @NotNull(message = "wallet phone number must be set")
     private String walletPhoneNumber;
+    @NotNull(message = "merchant ID must be set")
     private Long merchantId;
 
     public Long getAmount() {
